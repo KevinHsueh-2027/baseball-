@@ -1,4 +1,4 @@
 SELECT name, year, wins, losses 
 FROM Teams 
-Order By wins Desc
+Order By losses Desc
 Limit 5;
