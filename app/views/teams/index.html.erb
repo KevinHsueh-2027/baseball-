@@ -1,0 +1,33 @@
+<% content_for :title, "Teams, #{@year}" %>
+
+<h1 class="text-2xl font-bold mb-4">Teams, <%= @year %></h1>
+
+<%= form_with url: teams_path, method: :get, class: "mb-6 flex gap-2 items-center" do |form| %>
+  <%= form.label :year, "Season" %>
+  <%= form.number_field :year, value: @year, in: 1871..2020, class: "w-24 rounded border border-stone-300 px-2 py-1" %>
+  <%= form.submit "Show", name: nil, class: "cursor-pointer rounded bg-stone-900 px-3 py-1 text-sm text-white" %>
+<% end %>
+
+<table class="min-w-full text-sm bg-white border border-stone-300">
+  <thead>
+    <tr class="bg-stone-800 text-white">
+      <th class="px-3 py-2 text-left">Team</th>
+      <th class="px-3 py-2 text-left">Park</th>
+      <th class="px-3 py-2 text-right">Wins</th>
+      <th class="px-3 py-2 text-right">Losses</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr class="border-b border-stone-200 even:bg-stone-50">
+        <td class="px-3 py-1.5"><%= team.name %></td>
+        <td class="px-3 py-1.5"><%= team.park %></td>
+        <td class="px-3 py-1.5 text-right"><%= team.wins %></td>
+        <td class="px-3 py-1.5 text-right"><%= team.losses %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p class="mt-6 text-sm text-stone-600">This page asked the database:</p>
+<pre class="mt-1 p-3 text-sm bg-stone-100 rounded whitespace-pre-wrap"><%= @teams.to_sql %></pre>
